@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title>
+    Searching Flights!
+  </mat-card-title>
+  <mat-card-content>
+    <form>
+      <mat-form-field class="full-width">
+        <input type="text" matInput [matAutocomplete]="auto" placeholder="Input Origin place"
+          [formControl]="txtFormControl" #origin>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-hint align="end">Hint: ATL</mat-hint>
+        <mat-error align="end" *ngIf="txtFormControl.hasError('required')">
+          Please input a valid origin place!
+        </mat-error>
+      </mat-form-field>
+      <button mat-button color="primary" (click)="displayText = origin.value" (click)="btnSearch()">Search</button>
+    </form>
+  </mat-card-content>
+</mat-card>
